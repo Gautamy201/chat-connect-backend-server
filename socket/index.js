@@ -11,6 +11,8 @@ const {
 } = require("../model/conversationModel.js");
 
 // soket connection
+const allowedOrigins = ["https://chat-connect-app.netlify.app"];
+const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: function (origin, callback) {
