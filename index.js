@@ -1,4 +1,5 @@
 const express = require("express");
+const serverless = require(“serverless-http”);
 const cors = require("cors");
 require("dotenv").config();
 const connectDB = require("./config/connectDB");
@@ -7,14 +8,14 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const { app, server } = require("./socket/index.js");
 
+const corsOptions = {
+origin: ‘https://chat-connect-backend-server.onrender.com/’,
+credentials: true,
+optionSuccessStatus: 200
+}
+
 // const app = express();
-app.use(cors());
-app.use(
-  cors({
-    origin: "*", // List of allowed methods
-    //credentials: true,
-  })
-);
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
