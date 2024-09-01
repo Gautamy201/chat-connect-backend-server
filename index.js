@@ -7,11 +7,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const { app, server } = require("./socket/index.js");
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://chat-connect-app.netlify.app",
-  "http://192.168.68.172:5173/",
-];
+const allowedOrigins = ["https://chat-connect-app.netlify.app"];
 
 app.use(
   cors({

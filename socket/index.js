@@ -11,11 +11,17 @@ const {
 } = require("../model/conversationModel.js");
 
 // soket connection
-
+const allowedOrigins = ["https://chat-connect-app.netlify.app"];
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL,
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   },
 });
@@ -33,7 +39,7 @@ io.on("connection", async (socket) => {
   const user = await getUserDetailFromToken(token);
 
   // create a room
-  socket.join(user?._id.toString());
+  socket.join(user?._id?.toString());
   onlineUser.add(user?._id?.toString());
 
   io.emit("onlineUser", Array.from(onlineUser));
