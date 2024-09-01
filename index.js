@@ -12,7 +12,7 @@ app.use(cors());
 app.use(
   cors({
     origin: "*", // List of allowed methods
-    credentials: true,
+    //credentials: true,
   })
 );
 
