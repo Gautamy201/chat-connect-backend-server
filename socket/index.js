@@ -11,17 +11,17 @@ const {
 } = require("../model/conversationModel.js");
 
 // soket connection
-const allowedOrigins = ["https://chat-connect-app.netlify.app"];
-const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: (origin, callback) => {
-      if (allowedOrigins.includes(origin)) {
+    origin: function (origin, callback) {
+      const allowedOrigins = ["https://chat-connect-app.netlify.app"];
+      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
       }
     },
+    methods: ["GET", "POST"],
     credentials: true,
   },
 });
