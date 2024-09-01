@@ -8,7 +8,9 @@ const cookieParser = require("cookie-parser");
 const { app, server } = require("./socket/index.js");
 
 const corsOptions = {
-origin: ‘https://chat-connect-backend-server.onrender.com/’,
+origin: '*',
+methods: ['GET', 'POST', 'PUT', 'DELETE'],
+allowedHeaders: ['Content-Type', 'Authorization'],
 credentials: true,
 optionSuccessStatus: 200
 }
