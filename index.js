@@ -7,16 +7,20 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const { app, server } = require("./socket/index.js");
 
-const corsOptions = {
-origin: '*',
-methods: ['GET', 'POST', 'PUT', 'DELETE'],
-allowedHeaders: ['Content-Type', 'Authorization'],
-credentials: true,
-optionSuccessStatus: 200
-}
+const allowedOrigins = ['http://localhost:5173', 'https://chat-connect-app.netlify.app'];
 
-// const app = express();
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
