@@ -6,14 +6,12 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const router = require("./routes/index");
 const { app, server } = require("./socket/index.js");
-
-const allowedOrigins = ["http://localhost:8080/"];
+const url = ["https://chat-connect-app.netlify.app", "http://localhost:8080"];
 app.use(
   cors({
-    origin: "http://localhost:8080/",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
+    origin: url, // Allow this origin
+    methods: ["GET", "POST"], // Specify allowed methods
+    credentials: true, // Allow credentials if needed
   })
 );
 
@@ -27,6 +25,6 @@ app.use("/api", router);
 connectDB().then(() => {
   console.log("MongoDB connected");
   server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${url[1]}`);
   });
 });

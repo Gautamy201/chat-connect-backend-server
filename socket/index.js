@@ -1,7 +1,7 @@
 const express = require("express");
 const { Server } = require("socket.io");
-const http = require("http");
 const app = express();
+const { createServer } = require("http");
 // const getUserDetailFromToken = require("../helper/getUserDetailFromToken");
 // const userModel = require("../model/userModel");
 // const {
@@ -10,11 +10,13 @@ const app = express();
 // } = require("../model/conversationModel.js");
 
 // soket connection
-const server = http.createServer(app);
+const url = ["https://chat-connect-app.netlify.app", "http://localhost:5173"];
+const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: url,
     methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
     credentials: true,
   },
 });
