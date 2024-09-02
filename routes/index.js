@@ -14,7 +14,7 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.send({
     deatil: {
-      Title: "Welcome to Node.js API for chat pplication",
+      Title: "Welcome to Node.js API for chat application",
       AplicationName: "Chat-Connect",
       Version: "1.0.0",
       Auther: "Gautam Kamlesh Yadav",
