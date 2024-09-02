@@ -1,6 +1,7 @@
-const { response } = require("express");
+const express = require("express");
 const UserModel = require("../model/userModel");
 const bcrptyjs = require("bcryptjs");
+
 const jwt = require("jsonwebtoken");
 
 async function checkPssword(req, res) {
@@ -24,8 +25,9 @@ async function checkPssword(req, res) {
     });
 
     const cookieOption = {
-      http: true,
+      httpOnly: true,
       secure: true,
+      sameSite: "Lax",
     };
     return res.cookie("token", token, cookieOption).status(200).json({
       message: "Login successfully",
