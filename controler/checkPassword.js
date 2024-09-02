@@ -27,7 +27,7 @@ async function checkPssword(req, res) {
     const cookieOption = {
       httpOnly: true,
       secure: true,
-      sameSite: "Lax",
+      sameSite: "none",
     };
     return res.cookie("token", token, cookieOption).status(200).json({
       message: "Login successfully",
