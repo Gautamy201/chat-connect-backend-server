@@ -1,4 +1,5 @@
 const express = require("express");
+const router = express.Router();
 // const registerUser = require("../controler/registerUser");
 // const checkEmail = require("../controler/checkEmail");
 // const checkPssword = require("../controler/checkPassword");
